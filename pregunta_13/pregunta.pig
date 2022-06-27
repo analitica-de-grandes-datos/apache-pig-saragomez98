@@ -12,7 +12,7 @@ Escriba el código equivalente a la siguiente consulta en SQL.
        u 
    WHERE 
        color 
-   LIKE 'b%';
+   LIKE 'b%'
 
 Escriba el resultado a la carpeta `output` del directorio actual. Para la 
 evaluación, pig sera eejcutado ejecutado en modo local:
