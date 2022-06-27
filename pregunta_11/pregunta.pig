@@ -37,7 +37,8 @@ u = LOAD 'data.csv' USING PigStorage(',')
         firstname:CHARARRAY, 
         surname:CHARARRAY, 
         birthday:CHARARRAY, 
-        color:CHARARRAY, 
+        color:CHARARRAY,
+        quantity:INT);
 
 z = FOREACH u GENERATE $2, UPPER($2), LOWER($2);
 y = ORDER z BY $0 ASC;
