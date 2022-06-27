@@ -26,4 +26,15 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+u = LOAD 'data.csv' USING PigStorage(',') 
+    AS (id:int, 
+        firstname:CHARARRAY, 
+        surname:CHARARRAY, 
+        birthday:CHARARRAY, 
+        color:CHARARRAY, 
+        quantity:INT);
+z = FOREACH u GENERATE surname;
+y = FILTER z BY SUBSTRING($0,0,1) IN ('D','E','F', 'G','H','I','J','K'); 
+dump y;
 
+store y into 'output';
