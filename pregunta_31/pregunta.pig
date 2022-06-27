@@ -13,4 +13,19 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+fs -rm -f -r output;
+ 
+u = LOAD 'data.csv' USING PigStorage(',') 
+    AS (id:int, 
+        firstname:CHARARRAY, 
+        surname:CHARARRAY, 
+        birthday:CHARARRAY, 
+        color:CHARARRAY, 
+        quantity:INT);
 
+y = FOREACH u GENERATE birthday;
+z = FOREACH y GENERATE SUBSTRING($0,0,4);
+grouped = GROUP z BY $0;
+wordcount = FOREACH grouped GENERATE $0, COUNT($1);
+dump wordcount; 
+store wordcount into 'output' USING PigStorage(',');
