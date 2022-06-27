@@ -19,4 +19,18 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+fs -rm -f -r output;
+
+u = LOAD 'data.csv' USING PigStorage(',') 
+    AS (id:int, 
+        firstname:CHARARRAY, 
+        surname:CHARARRAY, 
+        birthday:CHARARRAY, 
+        color:CHARARRAY, 
+        quantity:INT);
+
+y = FOREACH u GENERATE firstname;
+z = FOREACH u GENERATE LAST_INDEX_OF(firstname,'ia');
+dump z;
+store z into 'output' USING PigStorage(',');
 
